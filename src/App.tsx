@@ -1,24 +1,24 @@
-
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Login from './pages/Login';
-
-
-const Dashboard = () => (
-  <div className="min-h-screen flex items-center justify-center bg-green-100 text-xl font-bold">
-    Welcome to the Dashboard
-  </div>
-);
+import DashboardComponent from './pages/Dashboard';
+import AboutUs from './pages/AboutUs';
+import UserDashboard from './pages/UserDashboard';
+import UserSettings from './pages/UserSettings';
 
 const App = () => {
   return (
-    <Router>
+    <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/" element={<Navigate to="/login" replace />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/about" element={<AboutUs />} />
+        <Route path="/dashboard" element={<DashboardComponent />} />
+        <Route path="/dashboard/user" element={<UserDashboard />} />
+        <Route path="/settings" element={<UserSettings />} />
+        <Route path="*" element={<Navigate to="/login" replace />} />
       </Routes>
-    </Router>
+    </BrowserRouter>
   );
 };
 
 export default App;
-

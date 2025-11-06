@@ -1,4 +1,6 @@
 @import "tailwindcss";
+
+@import "./app.css";
 /* Tailwind v4 – Invenza theme setup */
 
 /* Define custom colors using the new @theme block */
@@ -10,9 +12,5 @@
   --color-invenza-success: #576883;
   --color-invenza-accent: #C8174C;
 }
-
 /* Load Tailwind utilities (includes base + components internally) */
 @tailwind utilities;
-
-/* Example custom class using your theme colors */
-@import "./app.css";

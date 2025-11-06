@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Header from "../components/Header";
 import { useNavigate } from 'react-router-dom';
 
 const Login: React.FC = () => {
@@ -18,34 +19,28 @@ const Login: React.FC = () => {
       });
 
       if (res.ok) {
-        navigate('/Dashboard');
-      } else {
-        setError('Invalid credentials');
-      }
-    } catch (err) {
-      setError('Login failed');
+        const data = await res.json();
+
+      // Store the token in localStorage
+      localStorage.setItem("token", data.token);
+
+      // Navigate to dashboard
+      navigate('/Dashboard');
+    } else {
+      setError('Invalid credentials');
     }
-  };
+  } catch (err) {
+    setError('Login failed');
+  }
+};
 
   return (
-    <div className="bg-white font-sans min-h-screen m-0 flex flex-col items-center py-6">
-      {/* Logo */}
-      <div className="mb-8">
-        <img
-          src="Invenza.png"
-          alt="Invenza Logo"
-          className="max-w-[150px] h-auto mx-auto"
-          onError={(e) => {
-            const target = e.target as HTMLImageElement;
-            target.onerror = null;
-            target.src = 'https://placehold.co/160x60/FFFFFF/4F0509?text=INVENZA';
-          }}
-        />
-      </div>
+     <div className= "bg-white text-invenza-primary font-sans min-h-screen m-0 flex flex-col items-center py-6 pt-14">
+    <Header />
 
       {/* Login Box */}
       
-<div className="bg-invenza-navbar p-8 rounded-lg shadow-2xl w-[360px] text-center flex flex-col gap-6">
+<div className="bg-invenza-navbar p-8 rounded-lg shadow-2xl w-[360px] text-center flex flex-col">
   {/* Heading */}
   <h2 className="text-invenza-heading text-3xl font-semibold mb-4">Sign In</h2>
 
